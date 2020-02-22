@@ -1,0 +1,6 @@
+out
+node_modules
+.vscode-test/
+*.vsix
+.vscode
+/elephant-6-128.xcf
