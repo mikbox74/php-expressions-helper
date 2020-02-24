@@ -6,11 +6,11 @@ export function activate(context: vscode.ExtensionContext) {
 	registration = vscode.workspace.onDidChangeTextDocument(event => {
 		const changes = event.contentChanges[0];
 		const text = changes.text;
-		if (!changes.range.isSingleLine) {
+		const doc = event.document;
+		if (doc.languageId !== 'php' || !changes.range.isSingleLine) {
 			return true;
 		}
 		if (text === "-") {
-			const doc = event.document;
 			const editor = vscode.window.activeTextEditor;
 			const { line, character } = changes.range.start;
 			const prevPosition = new vscode.Position(line, character - 1);

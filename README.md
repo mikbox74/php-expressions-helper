@@ -15,6 +15,10 @@ This extension works better when `$` character added into `Editor: Word Separato
 
 ## Release Notes
 
+### 0.0.2
+
+Fix: works only for PHP scope now
+
 ### 0.0.1
 
 Initial release
