@@ -2,7 +2,7 @@
 	"name": "php-expressions-heper",
 	"displayName": "PHP expressions heper",
 	"description": "Helps you to write some expressions faster. Inspired by \"Netbeans PHP Enhancements plugin\"",
-	"version": "0.0.2",
+	"version": "0.1.0",
 	"icon" : "elephant-6-128.png",
 	"publisher": "MihailUrakov",
 	"repository": "https://github.com/mikbox74/php-expressions-helper",
@@ -23,8 +23,7 @@
 		"languages": [
 			{
 			  "id": "php",
-			  "extensions": [".php"],
-			  "aliases": ["PHP", "php"]
+			  "extensions": [".php"]
 			}
 		]
 	},

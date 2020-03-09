@@ -15,6 +15,10 @@ This extension works better when `$` character added into `Editor: Word Separato
 
 ## Release Notes
 
+### 0.1.0
+
+Little tokenizer added to prevent triggering inside strings, comments and embedded texts
+
 ### 0.0.2
 
 Fix: works only for PHP scope now
