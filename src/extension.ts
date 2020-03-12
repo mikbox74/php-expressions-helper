@@ -1,35 +1,35 @@
 import * as vscode from 'vscode'
 
 let registration: any
-let tokenRegex = /(?:\/\/|#)[^\n]*\n|\/\*(?:\n|.)*?\*\/|"(?:[^"\\]*(?:\\.[^"\\]*)*)"|'(?:[^'\\]*(?:\\.[^'\\]*)*)'|(?<BEGIN>\<(?:\?|%)=|(?:\<\?php|\<\?|\<%)\s?)|(?<END>\?\>|%\>)/g
+let tokenRegex = /(?:\/\/|#)[^\n]*[\n\r]*|\/\*(?:\n|\r|.)*?\*\/|"(?:[^"\\]*(?:\\.[^"\\]*)*)"|'(?:[^'\\]*(?:\\.[^'\\]*)*)'|(?<BEGIN>\<(?:\?|%)=|(?:\<\?php|\<\?|\<%)\s?)|(?<END>\?\>|%\>)/g
 
 function checkPosition(text: string, offset: number) {
 	let match: any
 	let isPHP = false
 	while ((match = tokenRegex.exec(text))) {
 		let start = match.index
-		//console.log({match, start, end, offset});
+		let end = match.index + match[0].length
+		// console.log({match, start, end, offset});
 		if (offset < start) {
 			tokenRegex.lastIndex = 0
 			break
 		}
-		let end = match.index + match[0].length
 		if (match.groups.BEGIN) {
 			isPHP = true
-			//console.log('BEGIN')
+			// console.log('BEGIN')
 		} else if (match.groups.END) {
 			isPHP = false
-			//console.log('END')
+			// console.log('END')
 		} else if (match[0] && isPHP) {
 			if (offset > start && offset <= end) {
-				//console.log('HERE NOT allowed (found)')
+				// console.log('HERE NOT allowed (found)')
 				tokenRegex.lastIndex = 0
 				return false
 			}
 		}
 	}
-	//if (isPHP) console.log('HERE allowed (NOT found)')
-	//else console.log('HERE NOT allowed')
+	// if (isPHP) console.log('HERE allowed (NOT found)')
+	// else console.log('HERE NOT allowed')
 	return isPHP
 }
 
@@ -71,11 +71,13 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 		}
 		if (text === '=') {
-			const doc = event.document
-			const editor = vscode.window.activeTextEditor
 			const { line, character } = changes.range.start
-			const startPosition = new vscode.Position(line, 0)
 			const currPosition = new vscode.Position(line, character)
+			if (!checkPosition(doc.getText(), doc.offsetAt(currPosition))) {
+				return true
+			}
+			const editor = vscode.window.activeTextEditor
+			const startPosition = new vscode.Position(line, 0)
 			const prevText = doc
 				.getText(new vscode.Range(startPosition, currPosition))
 				.trim()

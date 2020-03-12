@@ -1,5 +1,8 @@
 # Change Log
 
+## [0.1.1]
+### Fix for CRLF linebreaks
+
 ## [0.1.0] - 2020-03-07
 ### Little tokenizer added to prevent triggering inside strings, comments and embedded texts
 
