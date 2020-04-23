@@ -1,5 +1,8 @@
 # Change Log
 
+## [0.1.2] - 2020-04-23
+### Quick fix, catching of exceptions
+
 ## [0.1.1]
 ### Fix for CRLF linebreaks
 
