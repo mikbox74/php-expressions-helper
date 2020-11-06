@@ -4,7 +4,7 @@ Helps you to write some expressions faster. Inspired by "Netbeans PHP Enhancemen
 
 ## Features
 
-Typing hooks for "->" and "=>" (now for associative arrays only)
+Typing hooks for "->", "::" and "=>" (now for associative arrays only)
 
 ![demo](https://github.com/mikbox74/php-expressions-helper/raw/master/demo.gif)
 
