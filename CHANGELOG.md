@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.2.0] - 2020-11-06
+### Better char test for double arrow insertion (by [Yusup Hambali](https://github.com/sup-ham))
+### Added "Paamayim Nekudotayim" auto insertion
+
 ## [0.1.2] - 2020-04-23
 ### Quick fix, catching of exceptions
 

@@ -2,7 +2,7 @@
 	"name": "php-expressions-helper",
 	"displayName": "PHP expressions helper",
 	"description": "Helps you to write some expressions faster. Inspired by \"Netbeans PHP Enhancements plugin\"",
-	"version": "0.1.2",
+	"version": "0.2.0",
 	"icon" : "elephant-6-128.png",
 	"publisher": "MihailUrakov",
 	"repository": "https://github.com/mikbox74/php-expressions-helper",

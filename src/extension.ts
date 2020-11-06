@@ -39,6 +39,9 @@ export function activate(context: vscode.ExtensionContext) {
 	registration = vscode.workspace.onDidChangeTextDocument(event => {
 		try {
 			const changes = event.contentChanges[0]
+			if (!changes) {
+				return false
+			}
 			const text = changes.text
 			const doc = event.document
 			if (doc.languageId !== 'php' || !changes.range.isSingleLine) {
@@ -68,6 +71,33 @@ export function activate(context: vscode.ExtensionContext) {
 				if (nextText !== '>' && allowForPreviousWord) {
 					editor?.edit(TextEditorEdit => {
 						TextEditorEdit.insert(newPosition, '>')
+					})
+				}
+			}
+			if (text === ':') {
+				const { line, character } = changes.range.start
+				const position = new vscode.Position(line, character)
+				if (!checkPosition(doc.getText(), doc.offsetAt(position))) {
+					return true
+				}
+				const editor = vscode.window.activeTextEditor
+				const prevPosition = new vscode.Position(line, character - 1)
+				const newPosition = new vscode.Position(line, character + 1)
+				const nextPosition = new vscode.Position(line, character + 2)
+				const nextText = doc.getText(new vscode.Range(newPosition, nextPosition))
+				const prevText = doc.getText(new vscode.Range(prevPosition, position))
+
+				let allowForPreviousWord = false
+				const prevWordRange = doc.getWordRangeAtPosition(position)
+				const prevWord = doc.getText(prevWordRange)
+				if (prevWordRange && !/^[\d+]$/.test(prevWord)) {
+					allowForPreviousWord = true
+				} else {
+					allowForPreviousWord = prevText == ')'
+				}
+				if (nextText !== ':' && allowForPreviousWord) {
+					editor?.edit(TextEditorEdit => {
+						TextEditorEdit.insert(newPosition, ':')
 					})
 				}
 			}
