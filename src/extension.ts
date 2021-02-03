@@ -114,7 +114,7 @@ export function activate(context: vscode.ExtensionContext) {
 					.trim()
 				const prevChar = prevText.slice(-1)
 
-				if (/['"\w]/.test(prevChar)) {
+				if (prevChar == '"' || prevChar == "'") {
 					const newPosition = new vscode.Position(line, character + 1)
 					const nextPosition = new vscode.Position(line, character + 2)
 					const nextText = doc.getText(

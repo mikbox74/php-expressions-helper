@@ -1,5 +1,8 @@
 # Change Log
 
+## [0.2.1] - 2021-02-03
+### Removed previously added char test cause cursor position checker is not enough smart to prevent false positive.
+
 ## [0.2.0] - 2020-11-06
 ### Better char test for double arrow insertion (by [Yusup Hambali](https://github.com/sup-ham))
 ### Added "Paamayim Nekudotayim" auto insertion
